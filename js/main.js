@@ -44,7 +44,7 @@ function getCurrentNote(textArea) {
 
 function createNewNote() {
   noteTextArea.value = '';
-  noteTextArea.focus = '';
+  noteTextArea.focus();
   assignUniqueIDToElement(noteTextArea);
 }
 
