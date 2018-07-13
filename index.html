@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Clean note-taking web app.">
+  <title>Memoria - Clean note-taking web app</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="preload">
+  <div class="container">
+    <div class="app">
+      <header class="header">
+        <button title="Toggle Sidebar" class="button-pseudo button-sidebar">
+          <span></span>
+        </button>
+        <button title="Add Note" class="button-pseudo button-new">
+          <span></span>
+        </button>
+      </header>
+      <main>
+        <textarea class="note" placeholder="Start typing here..." spellcheck="false" autofocus></textarea>
+      </main>
+      <span class="status-bar"></span>
+    </div>
+    <aside class="sidebar">
+      <h1>All notes
+        <span class="dot">.</span>
+      </h1>
+      <ul class="notes"></ul>
+    </aside>
+  </div>
+  <script src="js/helpers.js"></script>
+  <script src="js/localStorage.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
