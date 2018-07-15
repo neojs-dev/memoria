@@ -63,6 +63,10 @@ textarea {
   background: inherit;
 }
 
+.preload * {
+  transition: none !important;
+}
+
 .container {
   padding: 1.5rem;
 }
