@@ -1,9 +1,9 @@
 :root {
-  --main-color: #001f3f;
-  --main-color-1: #b5b5b5;
-  --main-color-2: rgba(0, 0, 0, 0.1);
-  --main-color-3: #fc427b;
-  --main-bg-color: #ededed;
+  --main-color: #f7f7f7;
+  --main-color-1: #393939;
+  --main-color-2: #fc427b;
+  --main-color-3: #a5a5a5;
+  --main-bg-color: #1f1f1f;
 }
 
 ::-webkit-input-placeholder {
@@ -74,12 +74,36 @@ textarea {
 .app .header {
   position: fixed;
   top: 1.5rem;
-  left: 1.5rem;
+  right: 1.5rem;
   z-index: 10;
 }
 
 .button-pseudo {
   height: 2rem;
+}
+
+.button-new {
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+}
+
+.button-new.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.button-new span,
+.button-new span:before {
+  width: 1.2rem;
+  height: 2px;
+  display: block;
+  content: '';
+  background: var(--main-color);
+}
+
+.button-new span:before {
+  transform: rotate(90deg);
 }
 
 .button-sidebar span,
@@ -115,27 +139,21 @@ textarea {
   transform: rotate(-45deg);
 }
 
-.button-new {
+.button-delete {
   visibility: visible;
-  opacity: 1;
-  transition: all 0.2s ease-in-out;
 }
 
-.button-new.hidden {
-  visibility: hidden;
-  opacity: 0;
+.button-delete:after {
+  font-size: 1.2rem;
+  content: '×';
+  color: var(--main-color-2);
 }
 
-.button-new span,
-.button-new span:before {
-  width: 1.2rem;
-  height: 2px;
-  display: block;
-  content: '';
-  background: var(--main-color);
+.button-delete span {
+  transform: rotate(45deg);
 }
 
-.button-new span:before {
+.button-delete span:before {
   transform: rotate(90deg);
 }
 
@@ -160,7 +178,7 @@ textarea {
   position: fixed;
   right: 1.5rem;
   bottom: 0.8rem;
-  color: var(--main-color-1);
+  color: var(--main-color-3);
 }
 
 .status-bar.hidden {
@@ -191,19 +209,36 @@ textarea {
 }
 
 .dot {
-  color: var(--main-color-3);
+  color: var(--main-color-2);
   font-size: 2.5rem;
 }
 
 .sidebar .notes {
   padding: 0;
+  position: absolute;
+  left: 0;
+  width: 100%;
 }
 
 .sidebar .notes li {
+  display: flex;
+  padding: 0 1.5rem;
   font-weight: 600;
   line-height: 3rem;
-  cursor: pointer;
   list-style-type: none;
+}
+
+.sidebar .notes li:hover {
+  background: var(--main-color-1);
+}
+
+.sidebar .notes li.active {
+  background: var(--main-color-1);
+}
+
+.sidebar .notes li span {
+  width: 100%;
+  cursor: pointer;
 }
 
 @media (min-width: 62em) {
@@ -224,6 +259,14 @@ textarea {
 
   .button-sidebar {
     display: none;
+  }
+
+  .button-delete {
+    visibility: hidden;
+  }
+
+  .sidebar .notes li:hover .button-delete {
+    visibility: visible;
   }
 
   .app {
@@ -247,7 +290,7 @@ textarea {
     transform: translateY(0);
     position: static;
     width: 30%;
-    border-right: 1px solid var(--main-color-2);
+    border-right: 1px solid var(--main-color-1);
   }
 
   .sidebar h1 {

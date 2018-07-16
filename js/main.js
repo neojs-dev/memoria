@@ -17,6 +17,12 @@ function toggleSidebar() {
   toggleClass(statusBar, HIDDEN);
 }
 
+function hideSidebar() {
+  if (isActive(sidebar)) {
+    toggleSidebar();
+  }
+}
+
 function getNoteTitle(content) {
   const splittedContent = content.split('\n');
   const nonEmptyLines = splittedContent.filter(line => line.length > 0);
@@ -36,19 +42,23 @@ function limitTitleLength(title, length) {
 function getCurrentNote(textArea) {
   const [id, title, content] = [
     textArea.dataset.id,
-    limitTitleLength(getNoteTitle(textArea.value), 29),
+    limitTitleLength(getNoteTitle(textArea.value), 19),
     textArea.value,
   ];
   return { id, title, content };
 }
 
+function emptyTextArea(textArea) {
+  textArea.value = '';
+}
+
 function createNewNote() {
-  noteTextArea.value = '';
+  emptyTextArea(noteTextArea);
   noteTextArea.focus();
   assignUniqueIDToElement(noteTextArea);
 }
 
-function autoSaveNote() {
+function saveNote() {
   const currentNote = getCurrentNote(noteTextArea);
   if (currentNote.title) {
     addToLocalNotes(currentNote);
@@ -57,9 +67,33 @@ function autoSaveNote() {
   }
 }
 
+function deleteNoteFromLocalStorage(noteID) {
+  for (let key of Object.keys(localNotes)) {
+    if (key === noteID) {
+      delete localNotes[key];
+    }
+  }
+  saveToLocalStorage(localNotes);
+}
+
+function deleteNoteFromRenderedList(target) {
+  target.parentNode.removeChild(target);
+}
+
+function deleteNote(noteID, target) {
+  deleteNoteFromRenderedList(target);
+  emptyTextArea(noteTextArea);
+  deleteNoteFromLocalStorage(noteID);
+}
+
 function createNotesList() {
+  const currentNote = getCurrentNote(noteTextArea);
   const notesListArray = Object.keys(localNotes).map(
-    key => `<li data-id=${key}>${localNotes[key].title}</li>`,
+    key =>
+      `<li data-id=${key} ${currentNote.id === key ? "class='active'" : ''}>
+        <span>${localNotes[key].title}</span>
+        <button title="Delete Note" class="button-delete"></button>
+      </li>`,
   );
   return notesListArray.join('');
 }
@@ -68,17 +102,27 @@ function renderNotesList() {
   notesList.innerHTML = createNotesList();
 }
 
-function selectNote(noteID) {
+function getNoteFromlocalNotes(noteID) {
   for (let key of Object.keys(localNotes)) {
     if (key === noteID) {
       noteTextArea.value = localNotes[key].content;
       noteTextArea.dataset.id = key;
     }
   }
+}
 
-  if (isActive(sidebar)) {
-    toggleSidebar();
+function highlightActiveNote(target) {
+  const activeNote = target.parentNode.querySelector('.active');
+  if (activeNote) {
+    removeClass(activeNote, 'active');
   }
+  addClass(target, 'active');
+}
+
+function selectNote(noteID, target) {
+  getNoteFromlocalNotes(noteID);
+  highlightActiveNote(target);
+  hideSidebar();
 }
 
 function handleLoad() {
@@ -107,8 +151,12 @@ function handleClick(event) {
       createNewNote();
     }
 
-    if (event.target.matches('ul.notes li')) {
-      selectNote(event.target.dataset.id);
+    if (event.target.matches('button.button-delete')) {
+      deleteNote(event.target.parentNode.dataset.id, event.target.parentNode);
+    }
+
+    if (event.target.matches('ul.notes li span')) {
+      selectNote(event.target.parentNode.dataset.id, event.target.parentNode);
     }
   }
 }
@@ -120,7 +168,7 @@ function handleKeyDown() {
 }
 
 function handleKeyUp() {
-  autoSaveNote();
+  saveNote();
   statusBar.textContent = 'Saved';
 }
 
