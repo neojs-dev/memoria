@@ -14,6 +14,11 @@ function removeClass(target, className) {
   target.classList.remove(className);
 }
 
+function nonEmptyLineFilter(array) {
+  const nonEmptyLines = array.filter(line => line.length > 0);
+  return nonEmptyLines[0];
+}
+
 function generateUniqueID() {
   return new Date().getTime();
 }

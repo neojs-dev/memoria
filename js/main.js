@@ -25,24 +25,14 @@ function hideSidebar() {
 
 function getNoteTitle(content) {
   const splittedContent = content.split('\n');
-  const nonEmptyLines = splittedContent.filter(line => line.length > 0);
-  const title = nonEmptyLines[0];
+  const title = nonEmptyLineFilter(splittedContent);
   return title;
-}
-
-function limitTitleLength(title, length) {
-  if (title && title.length > length) {
-    const truncatedTitle = title.slice(0, length + 1);
-    return `${truncatedTitle}...`;
-  } else {
-    return title;
-  }
 }
 
 function getCurrentNote(textArea) {
   const [id, title, content] = [
     textArea.dataset.id,
-    limitTitleLength(getNoteTitle(textArea.value), 19),
+    getNoteTitle(textArea.value),
     textArea.value,
   ];
   return { id, title, content };
