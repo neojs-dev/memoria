@@ -158,9 +158,9 @@ textarea {
 }
 
 .app .note {
-  margin-top: 3.5rem;
+  margin-top: 4.5rem;
   width: 100%;
-  height: calc(100vh - 8.4rem);
+  height: calc(100vh - 9.4rem);
   resize: none;
   outline: none;
   opacity: 1;
@@ -196,6 +196,7 @@ textarea {
   visibility: hidden;
   transform: translateY(-10vh);
   transition: all 0.2s cubic-bezier(1, 0.01, 0.52, 0.96);
+  overflow-y: auto;
 }
 
 .sidebar.active {
@@ -206,6 +207,7 @@ textarea {
 
 .sidebar h1 {
   margin-top: 3.45rem;
+  margin-bottom: 0;
 }
 
 .dot {
@@ -221,24 +223,27 @@ textarea {
 }
 
 .sidebar .notes li {
+  color: var(--main-color-3);
   display: flex;
   padding: 0 1.5rem;
-  font-weight: 600;
   line-height: 3rem;
   list-style-type: none;
 }
 
 .sidebar .notes li:hover {
-  background: var(--main-color-1);
+  color: var(--main-color);
 }
 
 .sidebar .notes li.active {
-  background: var(--main-color-1);
+  color: var(--main-color);
 }
 
 .sidebar .notes li span {
   width: 100%;
   cursor: pointer;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }
 
 @media (min-width: 62em) {
@@ -249,12 +254,12 @@ textarea {
   }
 
   .app {
-    width: 70%;
+    width: 80%;
   }
 
   .app .header {
     top: 0.5rem;
-    left: calc(30% - 2.5rem);
+    left: calc(20% - 2.5rem);
   }
 
   .button-sidebar {
@@ -263,10 +268,6 @@ textarea {
 
   .button-delete {
     visibility: hidden;
-  }
-
-  .sidebar .notes li:hover .button-delete {
-    visibility: visible;
   }
 
   .app {
@@ -281,7 +282,7 @@ textarea {
   }
 
   .status-bar {
-    top: 0.8rem;
+    top: 1rem;
   }
 
   .sidebar {
@@ -289,11 +290,19 @@ textarea {
     opacity: 1;
     transform: translateY(0);
     position: static;
-    width: 30%;
+    width: 20%;
     border-right: 1px solid var(--main-color-1);
   }
 
   .sidebar h1 {
     margin-top: 1.67rem;
+  }
+
+  .sidebar .notes li {
+    line-height: 2.2rem;
+  }
+
+  .sidebar .notes li:hover .button-delete {
+    visibility: visible;
   }
 }
