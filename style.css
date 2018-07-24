@@ -1,8 +1,8 @@
 :root {
   --main-color: #f7f7f7;
-  --main-color-1: #393939;
-  --main-color-2: #fc427b;
-  --main-color-3: #a5a5a5;
+  --main-color-1: #a5a5a5;
+  --main-color-2: #393939;
+  --main-color-3: #fc427b;
   --main-bg-color: #1f1f1f;
 }
 
@@ -22,14 +22,13 @@
 }
 
 html {
-  font-size: 16px;
   font-size: calc(1em + 0.15vw);
   box-sizing: border-box;
 }
 
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
@@ -67,15 +66,11 @@ textarea {
   transition: none !important;
 }
 
-.container {
-  padding: 1.5rem;
-}
-
 .app .header {
   position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
-  z-index: 10;
+  top: 1rem;
+  right: 1rem;
+  z-index: 99;
 }
 
 .button-pseudo {
@@ -102,13 +97,13 @@ textarea {
   background: var(--main-color);
 }
 
-.button-new span:before {
+.button-new span::before {
   transform: rotate(90deg);
 }
 
 .button-sidebar span,
-.button-sidebar span:before,
-.button-sidebar span:after {
+.button-sidebar span::before,
+.button-sidebar span::after {
   width: 1.2rem;
   height: 2px;
   display: block;
@@ -117,12 +112,12 @@ textarea {
   transition: all 0.2s ease-in-out;
 }
 
-.button-sidebar span:before {
+.button-sidebar span::before {
   position: absolute;
   transform: translateY(-7px);
 }
 
-.button-sidebar span:after {
+.button-sidebar span::after {
   position: absolute;
   transform: translateY(7px);
 }
@@ -131,11 +126,11 @@ textarea {
   background: transparent;
 }
 
-.button-sidebar.active span:before {
+.button-sidebar.active span::before {
   transform: rotate(45deg);
 }
 
-.button-sidebar.active span:after {
+.button-sidebar.active span::after {
   transform: rotate(-45deg);
 }
 
@@ -143,28 +138,23 @@ textarea {
   visibility: visible;
 }
 
-.button-delete:after {
+.button-delete::after {
   font-size: 1.2rem;
   content: '×';
-  color: var(--main-color-2);
-}
-
-.button-delete span {
-  transform: rotate(45deg);
-}
-
-.button-delete span:before {
-  transform: rotate(90deg);
+  color: var(--main-color-3);
 }
 
 .app .note {
-  margin-top: 4.5rem;
+  position: fixed;
+  top: 4rem;
+  padding: 0 1rem;
   width: 100%;
-  height: calc(100vh - 9.4rem);
+  height: calc(100vh - 7rem);
   resize: none;
   outline: none;
+  line-height: 1.5;
+  visibility: visible;
   opacity: 1;
-  line-height: 1.6;
 }
 
 .app .note.hidden {
@@ -174,29 +164,37 @@ textarea {
 }
 
 .status-bar {
-  visibility: visible;
+  color: var(--main-color-1);
   position: fixed;
-  right: 1.5rem;
-  bottom: 0.8rem;
-  color: var(--main-color-3);
+  left: 1rem;
+  bottom: 1rem;
+  visibility: visible;
+  opacity: 1;
 }
 
 .status-bar.hidden {
   visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
 }
 
 .sidebar {
   position: fixed;
-  top: 0;
+  top: 4rem;
   left: 0;
+  padding: 0 1rem 1rem 1rem;
   width: 100vw;
-  height: 100vh;
-  padding: 1.5rem;
-  opacity: 0;
+  height: calc(100vh - 4rem);
   visibility: hidden;
+  opacity: 0;
   transform: translateY(-10vh);
   transition: all 0.2s cubic-bezier(1, 0.01, 0.52, 0.96);
   overflow-y: auto;
+}
+
+.sidebar h1 {
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
 .sidebar.active {
@@ -205,28 +203,21 @@ textarea {
   transform: translateY(0);
 }
 
-.sidebar h1 {
-  margin-top: 3.45rem;
-  margin-bottom: 0;
-}
-
 .dot {
-  color: var(--main-color-2);
+  color: var(--main-color-3);
   font-size: 2.5rem;
 }
 
 .sidebar .notes {
+  margin: 0;
   padding: 0;
-  position: absolute;
-  left: 0;
   width: 100%;
 }
 
 .sidebar .notes li {
-  color: var(--main-color-3);
+  color: var(--main-color-1);
   display: flex;
-  padding: 0 1.5rem;
-  line-height: 3rem;
+  line-height: 2.2rem;
   list-style-type: none;
 }
 
@@ -239,6 +230,7 @@ textarea {
 }
 
 .sidebar .notes li span {
+  font-weight: bold;
   width: 100%;
   cursor: pointer;
   white-space: nowrap;
@@ -246,20 +238,33 @@ textarea {
   text-overflow: ellipsis;
 }
 
+.scroll-bar {
+  visibility: hidden;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--main-color-3);
+}
+
 @media (min-width: 62em) {
+  body {
+    overflow-y: hidden;
+  }
+
   .container {
     display: flex;
     flex-direction: row-reverse;
-    padding: 0;
   }
 
   .app {
     width: 80%;
+    height: 100vh;
+    border-left: 1px solid var(--main-color-2);
   }
 
   .app .header {
-    top: 0.5rem;
-    left: calc(20% - 2.5rem);
+    left: calc(20% - 3rem);
   }
 
   .button-sidebar {
@@ -270,39 +275,33 @@ textarea {
     visibility: hidden;
   }
 
-  .app {
-    overflow: hidden;
-    height: 100vh;
-  }
-
   .app .note {
-    margin-top: 0;
-    padding: 4rem 1.5rem 1.5rem 1.5rem;
-    height: 100vh;
+    top: 5rem;
+    width: 80%;
+    height: calc(100vh - 8rem);
+    overflow-y: hidden;
   }
 
   .status-bar {
-    top: 1rem;
+    left: calc(20% + 1rem);
   }
 
   .sidebar {
+    top: 5rem;
+    padding: 0 1rem;
+    transform: translateY(0);
     visibility: visible;
     opacity: 1;
-    transform: translateY(0);
-    position: static;
     width: 20%;
-    border-right: 1px solid var(--main-color-1);
-  }
-
-  .sidebar h1 {
-    margin-top: 1.67rem;
-  }
-
-  .sidebar .notes li {
-    line-height: 2.2rem;
+    height: calc(100vh - 8rem);
+    overflow-y: hidden;
   }
 
   .sidebar .notes li:hover .button-delete {
+    visibility: visible;
+  }
+
+  .scroll-bar {
     visibility: visible;
   }
 }
