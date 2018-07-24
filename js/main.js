@@ -3,6 +3,7 @@ const noteTextArea = document.querySelector('.note');
 const sidebar = document.querySelector('.sidebar');
 const notesList = document.querySelector('.notes');
 const statusBar = document.querySelector('.status-bar');
+const scrollBar = document.querySelector('.scroll-bar');
 const newNoteButton = document.querySelector('.button-new');
 const sidebarButton = document.querySelector('.button-sidebar');
 
@@ -55,7 +56,10 @@ function saveNote() {
     saveToLocalStorage(localNotes);
     renderNotesList();
   }
+  statusBar.textContent = 'Saved';
 }
+
+const autoSave = debounce(saveNote, 250);
 
 function deleteNoteFromLocalStorage(noteID) {
   for (let key of Object.keys(localNotes)) {
@@ -73,6 +77,7 @@ function deleteNoteFromRenderedList(target) {
 function deleteNote(noteID, target) {
   deleteNoteFromRenderedList(target);
   emptyTextArea(noteTextArea);
+  updateScrollBar();
   deleteNoteFromLocalStorage(noteID);
 }
 
@@ -112,7 +117,38 @@ function highlightActiveNote(target) {
 function selectNote(noteID, target) {
   getNoteFromlocalNotes(noteID);
   highlightActiveNote(target);
+  resetScroll();
+  updateScrollBar();
   hideSidebar();
+}
+
+function syncWheel(deltaY) {
+  sidebar.scrollTop += deltaY;
+  noteTextArea.scrollTop += deltaY;
+}
+
+function resetScroll() {
+  noteTextArea.scrollTop = 0;
+}
+
+function getScrollPrecentage(target) {
+  const scrollTop = target.scrollTop;
+  const scrollHeight = target.scrollHeight;
+  const offsetHeight = target.offsetHeight;
+  console.log(offsetHeight);
+  const maximumAmount = scrollHeight - offsetHeight;
+  const precentage = Math.round((scrollTop / maximumAmount) * 100);
+  return precentage || 0;
+}
+
+function updateScrollBar() {
+  if (isDesktop(window.innerWidth)) {
+    if (noteTextArea.scrollHeight > sidebar.scrollHeight) {
+      scrollBar.style.width = `${getScrollPrecentage(noteTextArea)}%`;
+    } else {
+      scrollBar.style.width = `${getScrollPrecentage(sidebar)}%`;
+    }
+  }
 }
 
 function handleLoad() {
@@ -158,12 +194,19 @@ function handleKeyDown() {
 }
 
 function handleKeyUp() {
-  saveNote();
-  statusBar.textContent = 'Saved';
+  updateScrollBar();
+  autoSave();
+}
+
+function handleWheel(event) {
+  event.preventDefault();
+  syncWheel(event.deltaY);
+  updateScrollBar();
 }
 
 window.addEventListener('load', handleLoad, true);
 document.addEventListener('DOMContentLoaded', handleDOMContentLoaded, false);
 document.addEventListener('click', handleClick, false);
 noteTextArea.addEventListener('keydown', handleKeyDown, false);
-noteTextArea.addEventListener('keyup', debounce(handleKeyUp, 600), false);
+noteTextArea.addEventListener('keyup', handleKeyUp, false);
+document.addEventListener('wheel', handleWheel, false);
