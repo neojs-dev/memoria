@@ -35,3 +35,7 @@ function debounce(callback, delay) {
     timeoutID = setTimeout(() => callback.apply(this, arguments), delay);
   };
 }
+
+function isDesktop(width) {
+  return width > 992;
+}
