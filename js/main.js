@@ -61,6 +61,25 @@ function saveNote() {
 
 const autoSave = debounce(saveNote, 250);
 
+function getScrollPrecentage(target) {
+  const scrollTop = target.scrollTop;
+  const scrollHeight = target.scrollHeight;
+  const offsetHeight = target.offsetHeight;
+  const maximumAmount = scrollHeight - offsetHeight;
+  const precentage = Math.round((scrollTop / maximumAmount) * 100);
+  return precentage || 0;
+}
+
+function updateScrollBar() {
+  if (isDesktop(window.innerWidth)) {
+    if (noteTextArea.scrollHeight > sidebar.scrollHeight) {
+      scrollBar.style.width = `${getScrollPrecentage(noteTextArea)}%`;
+    } else {
+      scrollBar.style.width = `${getScrollPrecentage(sidebar)}%`;
+    }
+  }
+}
+
 function deleteNoteFromLocalStorage(noteID) {
   for (let key of Object.keys(localNotes)) {
     if (key === noteID) {
@@ -129,26 +148,6 @@ function syncWheel(deltaY) {
 
 function resetScroll() {
   noteTextArea.scrollTop = 0;
-}
-
-function getScrollPrecentage(target) {
-  const scrollTop = target.scrollTop;
-  const scrollHeight = target.scrollHeight;
-  const offsetHeight = target.offsetHeight;
-  console.log(offsetHeight);
-  const maximumAmount = scrollHeight - offsetHeight;
-  const precentage = Math.round((scrollTop / maximumAmount) * 100);
-  return precentage || 0;
-}
-
-function updateScrollBar() {
-  if (isDesktop(window.innerWidth)) {
-    if (noteTextArea.scrollHeight > sidebar.scrollHeight) {
-      scrollBar.style.width = `${getScrollPrecentage(noteTextArea)}%`;
-    } else {
-      scrollBar.style.width = `${getScrollPrecentage(sidebar)}%`;
-    }
-  }
 }
 
 function handleLoad() {
