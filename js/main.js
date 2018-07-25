@@ -59,7 +59,7 @@ function saveNote() {
   statusBar.textContent = 'Saved';
 }
 
-const autoSave = debounce(saveNote, 250);
+const autoSave = debounce(saveNote, 800);
 
 function getScrollPrecentage(target) {
   const scrollTop = target.scrollTop;
