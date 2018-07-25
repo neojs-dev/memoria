@@ -66,10 +66,6 @@ textarea {
   transition: none !important;
 }
 
-.container {
-  height: 100vh;
-}
-
 .app .header {
   position: fixed;
   top: 1rem;
