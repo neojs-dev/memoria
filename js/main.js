@@ -5,22 +5,23 @@ const notesList = document.querySelector('.notes');
 const statusBar = document.querySelector('.status-bar');
 const scrollBar = document.querySelector('.scroll-bar');
 const newNoteButton = document.querySelector('.button-new');
-const sidebarButton = document.querySelector('.button-sidebar');
+const openSidebarButton = document.querySelector('.button-sidebar-open');
+const closeSidebarButton = document.querySelector('.button-sidebar-close');
 
 const ACTIVE = 'active';
 const HIDDEN = 'hidden';
 
-function toggleSidebar() {
-  toggleClass(sidebar, ACTIVE);
-  toggleClass(sidebarButton, ACTIVE);
-  toggleClass(noteTextArea, HIDDEN);
-  toggleClass(newNoteButton, HIDDEN);
-  toggleClass(statusBar, HIDDEN);
+function openSidebar() {
+  addClass(sidebar, ACTIVE);
+}
+
+function closeSidebar() {
+  removeClass(sidebar, ACTIVE);
 }
 
 function hideSidebar() {
   if (isActive(sidebar)) {
-    toggleSidebar();
+    removeClass(sidebar, ACTIVE);
   }
 }
 
@@ -106,7 +107,7 @@ function createNotesList() {
     key =>
       `<li data-id=${key} ${currentNote.id === key ? "class='active'" : ''}>
         <span>${localNotes[key].title}</span>
-        <button title="Delete Note" class="button-delete"></button>
+        <button title="Delete note" class="button-delete"></button>
       </li>`,
   );
   return notesListArray.join('');
@@ -162,17 +163,15 @@ function handleDOMContentLoaded() {
 
 function handleClick(event) {
   if (event.target) {
-    if (
-      event.target.matches('button.button-sidebar') ||
-      event.target.matches('button.button-sidebar span')
-    ) {
-      toggleSidebar();
+    if (event.target.matches('button.button-sidebar-open')) {
+      openSidebar();
     }
 
-    if (
-      event.target.matches('button.button-new') ||
-      event.target.matches('button.button-new span')
-    ) {
+    if (event.target.matches('button.button-sidebar-close')) {
+      closeSidebar();
+    }
+
+    if (event.target.matches('button.button-new')) {
       createNewNote();
     }
 
