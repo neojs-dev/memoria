@@ -76,7 +76,7 @@ textarea {
   margin-left: 0.5rem;
 }
 
-.button-new {
+.button-add {
   background-image: url('icons/plus.svg');
   background-size: cover;
   width: 25px;
@@ -135,7 +135,7 @@ textarea {
   transition: all 0.2s ease-in-out;
 }
 
-.status-bar {
+.statusbar {
   color: var(--main-color-1);
   position: fixed;
   left: 1rem;
@@ -144,7 +144,7 @@ textarea {
   opacity: 1;
 }
 
-.status-bar.hidden {
+.statusbar.hidden {
   visibility: hidden;
   opacity: 0;
   transition: all 0.2s ease-in-out;
@@ -212,7 +212,7 @@ textarea {
   text-overflow: ellipsis;
 }
 
-.scroll-bar {
+.scrollbar {
   visibility: hidden;
   position: fixed;
   left: 0;
@@ -260,7 +260,7 @@ textarea {
     overflow-y: hidden;
   }
 
-  .status-bar {
+  .statusbar {
     left: calc(20% + 1rem);
   }
 
@@ -283,7 +283,7 @@ textarea {
     visibility: visible;
   }
 
-  .scroll-bar {
+  .scrollbar {
     visibility: visible;
   }
 }
