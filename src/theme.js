@@ -43,7 +43,7 @@ function loadIcons(theme) {
 }
 
 export function toggle() {
-  const theme = preference.get('theme');
+  const theme = preference.get('theme') || 'day';
   if (theme === 'day') {
     load('night');
   } else {
