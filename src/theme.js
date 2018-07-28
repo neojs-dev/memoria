@@ -38,7 +38,7 @@ export function load(theme) {
 function loadIcons(theme) {
   buttons.forEach(button => {
     let name = button.dataset.button;
-    button.style.backgroundImage = `url('../icons/${theme}/${name}.svg`;
+    button.style.backgroundImage = `url('../icons/${theme}/${name}.svg')`;
   });
 }
 
