@@ -10,7 +10,7 @@ function li(value, key, id) {
   return `
     <li data-id=${key} ${id === key ? "class='active'" : ''}>
       <span>${value.title}</span>
-      <button title="Delete note" class="button-delete"></button>
+      <button title="Delete note" class="button-delete ns"></button>
     </li>
   `;
 }

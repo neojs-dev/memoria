@@ -1,8 +1,10 @@
 import * as STM from './db/stm.js';
+import * as preference from './db/preference.js';
 import * as editor from './editor.js';
 import * as sidebar from './sidebar.js';
 import * as notesList from './notesList.js';
 import * as scrollbar from './scrollbar.js';
+import * as theme from './theme.js';
 import { removeClass } from './helpers.js';
 
 const body = document.querySelector('body');
@@ -12,6 +14,7 @@ function handleLoad() {
 }
 
 function handleDOMContentLoaded() {
+  theme.load(preference.get('theme') || false);
   editor.assignUniqueID();
   STM.merge();
   notesList.render();
@@ -29,6 +32,10 @@ function handleClick(event) {
 
     if (event.target.matches('.button-sidebar-close')) {
       sidebar.close();
+    }
+
+    if (event.target.matches('.button-toggle-theme')) {
+      theme.toggle();
     }
 
     if (event.target.matches('.button-delete')) {
