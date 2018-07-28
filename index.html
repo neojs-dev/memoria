@@ -14,16 +14,17 @@
   <div class="container">
     <div class="app">
       <header class="header">
-        <button title="Add note" class="button-add"></button>
-        <button title="Open sidebar" class="button-sidebar-open"></button>
+        <button title="Night mode" class="button-toggle-theme" data-button="theme"></button>
+        <button title="Add note" class="button-add" data-button="plus"></button>
+        <button title="Open sidebar" class="button-sidebar-open" data-button="burger"></button>
       </header>
       <main>
-        <textarea class="note editor" placeholder="Start typing here..." spellcheck="false" autofocus></textarea>
+        <textarea class="editor" placeholder="Start typing here..." spellcheck="false" autofocus></textarea>
       </main>
       <span class="statusbar"></span>
     </div>
     <aside class="sidebar">
-      <button title="Close sidebar" class="button-sidebar-close"></button>
+      <button title="Close sidebar" class="button-sidebar-close" data-button="x"></button>
       <h1>All notes</h1>
       <ul class="notes"></ul>
     </aside>

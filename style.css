@@ -1,9 +1,9 @@
 :root {
-  --main-color: #f7f7f7;
-  --main-color-1: #a5a5a5;
-  --main-color-2: #393939;
+  --main-color: #1f1f1f;
+  --main-color-1: #a1a1a1;
+  --main-color-2: #dddddd;
   --main-color-3: #fc427b;
-  --main-bg-color: #1f1f1f;
+  --main-bg-color: #f7f7f7;
 }
 
 ::-webkit-input-placeholder {
@@ -66,25 +66,25 @@ textarea {
   transition: none !important;
 }
 
-.app .header {
+.header {
   position: fixed;
   top: 1rem;
   right: 1rem;
 }
 
-.app .header button {
+.header button {
   margin-left: 0.5rem;
 }
 
 .button-add {
-  background-image: url('icons/plus.svg');
+  background-image: url('icons/day/plus.svg');
   background-size: cover;
   width: 25px;
   height: 25px;
 }
 
 .button-sidebar-open {
-  background-image: url('icons/burger.svg');
+  background-image: url('icons/day/burger.svg');
   background-size: cover;
   width: 25px;
   height: 25px;
@@ -92,7 +92,7 @@ textarea {
 
 .button-sidebar-close {
   position: fixed;
-  background-image: url('icons/x.svg');
+  background-image: url('icons/day/x.svg');
   background-size: cover;
   width: 25px;
   height: 25px;
@@ -100,7 +100,7 @@ textarea {
 }
 
 .button-toggle-theme {
-  background-image: url('icons/theme.svg');
+  background-image: url('icons/day/theme.svg');
   background-size: cover;
   width: 25px;
   height: 25px;
@@ -113,10 +113,10 @@ textarea {
 .button-delete::after {
   font-size: 1.2rem;
   content: '×';
-  color: var(--main-color-3);
+  color: var(--main-color);
 }
 
-.app .note {
+.editor {
   position: fixed;
   top: 4rem;
   padding: 0 1rem;
@@ -127,12 +127,6 @@ textarea {
   line-height: 1.5;
   visibility: visible;
   opacity: 1;
-}
-
-.app .note.hidden {
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.2s ease-in-out;
 }
 
 .statusbar {
@@ -162,7 +156,8 @@ textarea {
   visibility: hidden;
   opacity: 0;
   transform: translateY(-100%);
-  transition: all 0.2s cubic-bezier(1, 0.01, 0.52, 0.96);
+  transition: transform 0.2s cubic-bezier(1, 0.01, 0.52, 0.96),
+    opacity 0.2s cubic-bezier(1, 0.01, 0.52, 0.96);
   overflow-y: auto;
 }
 
@@ -175,11 +170,6 @@ textarea {
   visibility: visible;
   opacity: 1;
   transform: translateY(0);
-}
-
-.dot {
-  color: var(--main-color-3);
-  font-size: 2.5rem;
 }
 
 .sidebar .notes {
@@ -237,8 +227,8 @@ textarea {
     border-left: 1px solid var(--main-color-2);
   }
 
-  .app .header {
-    left: calc(20% - 25px - 1.5rem);
+  .header {
+    left: calc(20% - 55px - 2rem);
   }
 
   .button-sidebar-open {
@@ -253,7 +243,7 @@ textarea {
     visibility: hidden;
   }
 
-  .app .note {
+  .editor {
     top: 5rem;
     width: 80%;
     height: calc(100% - 8rem);
