@@ -5,14 +5,14 @@ const themes = {
     '--main-color': '#1f1f1f',
     '--main-color-1': '#a1a1a1',
     '--main-color-2': '#dddddd',
-    '--main-color-3': '#fc427b',
+    '--main-color-3': '#ED4C67',
     '--main-bg-color': '#f7f7f7',
   },
   night: {
     '--main-color': '#f7f7f7',
     '--main-color-1': '#a5a5a5',
     '--main-color-2': '#393939',
-    '--main-color-3': '#fc427b',
+    '--main-color-3': '#12CBC4',
     '--main-bg-color': '#1f1f1f',
   },
 };
