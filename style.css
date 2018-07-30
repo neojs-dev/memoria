@@ -201,7 +201,6 @@ textarea {
 }
 
 .sidebar .notes li span {
-  font-weight: bold;
   width: 100%;
   cursor: pointer;
   white-space: nowrap;
@@ -237,8 +236,12 @@ textarea {
   .header {
     display: flex;
     position: fixed;
-    top: 1rem;
-    left: calc(20% - 50px - 1.5rem);
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 20%;
+    background: var(--main-bg-color);
+    padding: 1rem 0 1rem 1rem;
   }
 
   .header .left {
@@ -267,9 +270,10 @@ textarea {
   }
 
   .editor {
-    top: 5rem;
+    top: 0;
+    padding-top: 5rem;
     width: 80%;
-    height: calc(100% - 8rem);
+    height: calc(100% - 3rem);
     overflow-y: hidden;
   }
 
@@ -278,13 +282,13 @@ textarea {
   }
 
   .sidebar {
-    top: 5rem;
-    padding: 0 1rem;
+    top: 0;
+    padding: 5rem 1rem 0;
     transform: translateY(0);
     visibility: visible;
     opacity: 1;
     width: 20%;
-    height: calc(100% - 8rem);
+    height: calc(100% - 3rem);
     overflow-y: hidden;
   }
 
