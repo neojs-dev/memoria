@@ -66,14 +66,20 @@ textarea {
   transition: none !important;
 }
 
-.header {
+.header .left {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+}
+
+.header .left button {
+  margin-right: 0.5rem;
+}
+
+.header .right {
   position: fixed;
   top: 1rem;
   right: 1rem;
-}
-
-.header button {
-  margin-left: 0.5rem;
 }
 
 .button-add {
@@ -229,7 +235,23 @@ textarea {
   }
 
   .header {
-    left: calc(20% - 55px - 2rem);
+    display: flex;
+    position: fixed;
+    top: 1rem;
+    left: calc(20% - 50px - 1.5rem);
+  }
+
+  .header .left {
+    position: static;
+  }
+
+  .header .left button {
+    margin-right: 0;
+  }
+
+  .header .right {
+    position: static;
+    margin-left: 0.5rem;
   }
 
   .button-sidebar-open {

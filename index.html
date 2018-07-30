@@ -14,9 +14,13 @@
   <div class="container">
     <div class="app">
       <header class="header">
-        <button title="Night mode" class="button-toggle-theme" data-button="theme"></button>
-        <button title="Add note" class="button-add" data-button="plus"></button>
-        <button title="Open sidebar" class="button-sidebar-open" data-button="burger"></button>
+        <div class="left">
+          <button title="Open sidebar" class="button-sidebar-open" data-button="burger"></button>
+          <button title="Night mode" class="button-toggle-theme" data-button="theme"></button>
+        </div>
+        <div class="right">
+          <button title="Add note" class="button-add" data-button="plus"></button>
+        </div>
       </header>
       <main>
         <textarea class="editor" placeholder="Start typing here..." spellcheck="false" autofocus></textarea>
