@@ -31,3 +31,9 @@ export function debounce(callback, delay) {
 export function isDesktop(width) {
   return width > 992;
 }
+
+export function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+}
