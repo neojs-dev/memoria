@@ -1,7 +1,7 @@
 {
   "name": "Memoria",
   "short_name": "Memoria",
-  "start_url": "/",
+  "start_url": "./",
   "background_color": "#f7f7f7",
   "theme_color": "#1f1f1f",
   "display": "standalone",
