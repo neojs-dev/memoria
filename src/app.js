@@ -3,16 +3,14 @@ import * as preference from './db/preference.js';
 import * as editor from './editor.js';
 import * as sidebar from './sidebar.js';
 import * as notesList from './notesList.js';
-import * as scrollbar from './scrollbar.js';
 import * as theme from './theme.js';
-import * as serviceWorker from './serviceWorker.js';
-import { removeClass } from './helpers.js';
+import { removeClass, registerServiceWorker } from './helpers.js';
 
 const body = document.querySelector('body');
 
 function handleLoad() {
   removeClass(body, 'preload');
-  serviceWorker.register();
+  registerServiceWorker();
 }
 
 function handleDOMContentLoaded() {
