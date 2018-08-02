@@ -27,9 +27,11 @@ export function update() {
 }
 
 function handleWheel(event) {
-  event.preventDefault();
   sync(event.deltaY);
   update();
 }
 
-document.addEventListener('wheel', handleWheel, false);
+document.addEventListener('wheel', handleWheel, {
+  capture: false,
+  passive: true,
+});
