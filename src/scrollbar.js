@@ -11,9 +11,16 @@ function getPercentage(target) {
   return precentage || 0;
 }
 
+function normalize(deltaY) {
+  const speed = 53;
+  const direction = deltaY > 0 ? 1 : -1;
+  return direction * speed;
+}
+
 function sync(deltaY) {
-  editor.scrollTop += deltaY;
-  sidebar.scrollTop += deltaY;
+  const speed = normalize(deltaY);
+  editor.scrollTop += speed;
+  sidebar.scrollTop += speed;
 }
 
 export function update() {
