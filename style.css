@@ -51,6 +51,11 @@ button {
   cursor: pointer;
   font-size: inherit;
   font-family: inherit;
+  outline: 0;
+}
+
+button::-moz-focus-inner {
+  border: 0;
 }
 
 textarea {
@@ -73,7 +78,7 @@ textarea {
 }
 
 .header .left button {
-  margin-right: 0.5rem;
+  margin-right: 1rem;
 }
 
 .header .right {
@@ -124,10 +129,10 @@ textarea {
 
 .editor {
   position: fixed;
-  top: 4rem;
+  top: 3.56rem;
   padding: 0 1rem;
   width: 100%;
-  height: calc(100% - 7rem);
+  height: calc(100% - 6.44rem);
   resize: none;
   outline: none;
   line-height: 1.5;
@@ -254,7 +259,7 @@ textarea {
 
   .header .right {
     position: static;
-    margin-left: 0.5rem;
+    margin-left: 1rem;
   }
 
   .button-sidebar-open {
