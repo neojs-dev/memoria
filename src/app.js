@@ -10,7 +10,7 @@ const body = document.querySelector('body');
 
 function handleLoad() {
   removeClass(body, 'preload');
-  registerServiceWorker();
+  /* registerServiceWorker(); */
 }
 
 function handleDOMContentLoaded() {
