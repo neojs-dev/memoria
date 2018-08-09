@@ -67,6 +67,12 @@ textarea {
   background: inherit;
 }
 
+input {
+  border: 0;
+  outline: 0;
+  background: var(--main-bg-color);
+}
+
 .preload * {
   transition: none !important;
 }
@@ -222,6 +228,59 @@ textarea {
   background: var(--main-color-3);
 }
 
+.signin {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: var(--main-bg-color);
+  z-index: 101;
+}
+
+.signin-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.signin section {
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.signin-form h1 {
+  margin-bottom: 1.5rem;
+}
+
+.signin-form label {
+  font-size: 0.8rem;
+  color: var(--main-color-1);
+  margin-bottom: 0.5rem;
+}
+
+.signin-form input {
+  border-bottom: 1px solid var(--main-color-1);
+  font-size: 1rem;
+}
+
+.button-signin {
+  color: var(--main-bg-color);
+  background: var(--main-color);
+  padding: 0.5rem 0.25rem;
+  margin-top: 1.5rem;
+}
+
+.button-signin:hover {
+  opacity: 0.9;
+}
+
 @media (min-width: 62em) {
   body {
     overflow-y: hidden;
@@ -307,5 +366,11 @@ textarea {
 
   .scrollbar {
     visibility: visible;
+  }
+}
+
+@media (min-width: 48em) {
+  .signin section {
+    max-width: 22rem;
   }
 }
