@@ -56,7 +56,7 @@ function handleClick(event) {
     }
 
     if (event.target.matches('.button-signin')) {
-      signIn.handleSignInWithLink();
+      signIn.sendEmail();
     }
   }
 }

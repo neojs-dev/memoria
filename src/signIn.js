@@ -1,22 +1,14 @@
-const form = document.querySelector('.signin-form');
-const signIn = document.querySelector('.signin');
 const input = document.querySelector('#email');
+const signIn = document.querySelector('.signin');
+const form = document.querySelector('.signin-form');
 const headline = document.querySelector('.signin-headline');
 const description = document.querySelector('.signin-description');
-
-let emailConfirmation = false;
 
 function successMessage() {
   const email = localStorage.getItem('email');
   headline.textContent = 'Check your inbox';
   description.textContent = `A confirmation link has been sent to ${email}. 
   Click the link and you will be signed in.`;
-}
-
-function emailConfirmationMessage() {
-  headline.textContent = 'Email confirmation';
-  description.textContent = `Please provide the email you'd like to sign-in 
-  with for confirmation.`;
 }
 
 function handleError(error) {
@@ -29,23 +21,6 @@ function showForm() {
 
 function hideForm() {
   signIn.style.display = 'none';
-}
-
-function sendEmail(email) {
-  const actionCodeSettings = {
-    url: window.location.href,
-    handleCodeInApp: true,
-  };
-
-  firebase
-    .auth()
-    .sendSignInLinkToEmail(email, actionCodeSettings)
-    .then(() => {
-      localStorage.setItem('email', email);
-      input.value = '';
-      successMessage();
-    })
-    .catch(handleError);
 }
 
 function signInWithLink(email, link) {
@@ -67,30 +42,36 @@ function signInWithLink(email, link) {
   .catch(handleError);
 } 
 
-export function handleSignInWithLink() {
+export function sendEmail() {
   const email = input.value;
 
-  if (!emailConfirmation) {
-    sendEmail(email);
-  } else {
-    signInWithLink(email, window.location.href);
-  }
+  const actionCodeSettings = {
+    url: window.location.href,
+    handleCodeInApp: true,
+  };
+
+  firebase
+    .auth()
+    .sendSignInLinkToEmail(email, actionCodeSettings)
+    .then(() => {
+      localStorage.setItem('email', email);
+      input.value = '';
+      successMessage();
+    })
+    .catch(handleError);
 }
 
 export function handleSignIn() {
-  const email = localStorage.getItem('email');
+  let email = localStorage.getItem('email');
 
   if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
     if (!email) {
       // User opened the link on a different device. To prevent session
       // fixation attacks, ask the user to provide the associated email again.
-      emailConfirmation = true;
-      emailConfirmationMessage();
+      email = prompt('Please provide your email for confirmation.');
     }
-    
-    if (!emailConfirmation) {
-      signInWithLink(email, window.location.href);
-    }
+
+    signInWithLink(email, window.location.href);
    }
 }
 
