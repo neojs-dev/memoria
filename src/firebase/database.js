@@ -18,7 +18,6 @@ export function save() {
 }
 
 export function load() {
-  loading.show();
   const userId = getCurrentUserId();
   firebase.database().ref(`users/${userId}`).once('value').then(snapshot => {
     const notes = snapshot.val();
