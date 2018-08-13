@@ -5,6 +5,7 @@ import * as loading from '../loading.js';
 export default function handleAuthState() {
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
+      loading.show();
       signIn.hide(); 
       database.load();
     } else {
