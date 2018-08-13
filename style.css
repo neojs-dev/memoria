@@ -234,6 +234,7 @@ input {
   left: 0;
   background: var(--main-bg-color);
   z-index: 101;
+  display: none;
 }
 
 .signin-container {
@@ -279,6 +280,26 @@ input {
 
 .button-signin:hover {
   opacity: 0.9;
+}
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--main-bg-color);
+  z-index: 102;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading span {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.6rem;
+  font-weight: bold;
 }
 
 @media (min-width: 62em) {
