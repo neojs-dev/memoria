@@ -15,14 +15,6 @@ function handleError(error) {
   console.warn(error);
 }
 
-function showForm() {
-  signIn.style.display = 'block';
-}
-
-function hideForm() {
-  signIn.style.display = 'none';
-}
-
 function signInWithLink(email, link) {
   firebase
   .auth()
@@ -41,6 +33,14 @@ function signInWithLink(email, link) {
   })
   .catch(handleError);
 } 
+
+export function show() {
+  signIn.style.display = 'block';
+}
+
+export function hide() {
+  signIn.style.display = 'none';
+}
 
 export function sendEmail() {
   const email = input.value;
@@ -73,16 +73,6 @@ export function handleSignIn() {
 
     signInWithLink(email, window.location.href);
    }
-}
-
-export function handleAuthState() {
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      hideForm();
-    } else {
-      showForm();
-    }
-  });
 }
 
 function handleSubmit(event) {

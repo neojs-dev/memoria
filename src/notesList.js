@@ -1,4 +1,4 @@
-import * as STM from './db/stm.js';
+import * as STM from './stm/stm.js';
 import * as editor from './editor.js';
 import * as sidebar from './sidebar.js';
 import * as scrollbar from './scrollbar.js';

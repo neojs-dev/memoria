@@ -1,4 +1,5 @@
 import * as signIn from '../signIn.js';
+import handleAuthState from './auth.js';
 
 export function init() {
   const config = {
@@ -13,5 +14,7 @@ export function init() {
   firebase.initializeApp(config);
 
   signIn.handleSignIn();
-  signIn.handleAuthState();
+
+  handleAuthState();
 }
+

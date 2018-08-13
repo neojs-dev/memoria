@@ -1,5 +1,5 @@
-import * as STM from './db/stm.js';
-import * as preference from './db/preference.js';
+import * as STM from './stm/stm.js';
+import * as preference from './stm/preference.js';
 import * as editor from './editor.js';
 import * as sidebar from './sidebar.js';
 import * as notesList from './notesList.js';
