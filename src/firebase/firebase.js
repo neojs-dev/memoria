@@ -12,9 +12,7 @@ export function init() {
   };
 
   firebase.initializeApp(config);
-
   signIn.handleSignIn();
-
   handleAuthState();
 }
 
