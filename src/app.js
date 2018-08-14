@@ -13,7 +13,7 @@ const body = document.querySelector('body');
 function handleLoad() {
   removeClass(body, 'preload');
   firebase.init();
-  /* registerServiceWorker(); */
+  registerServiceWorker();
 }
 
 function handleDOMContentLoaded() {

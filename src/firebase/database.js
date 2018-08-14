@@ -10,21 +10,22 @@ function merge(notes) {
   STM.update(newSTM);  
 }
 
-function sync(lastOnline, lastOnlineRef) {
-  const notes = STM.getSTM();
-  const keys = notes.keys();
-  for (let key of keys) {
-    if (Number(key) > lastOnline) {
-      save();
-    }
-  }
-}
-
 export function save() {
   const userId = getCurrentUserId();
   const notes = STM.getSTM();
   const notesJSON = JSON.stringify([...notes]);
   firebase.database().ref(`users/${userId}/notes`).set(notesJSON);
+}
+
+function sync() {
+  const userId = getCurrentUserId();
+  firebase.database().ref(`users/${userId}`).once('value').then(snapshot => {
+    const notes = snapshot.val().notes;
+    if (notes) {
+      merge(notes);
+      save();
+    }
+  });
 }
 
 export function load() {
@@ -35,21 +36,15 @@ export function load() {
       merge(notes);
       notesList.render();
     }
-    loading.hide();
   });
 }
 
-export function userPresence() {
-  const userId = getCurrentUserId();
-  const lastOnlineRef = firebase.database().ref(`users/${userId}/lastOnline`);
-  const connectedRef = firebase.database().ref('.info/connected');
-  connectedRef.on('value', snapshot => {
+export function connectionListener() {
+  const connectionRef = firebase.database().ref('.info/connected');
+  connectionRef.on('value', snapshot => {
     if (snapshot.val() === true) {
-      lastOnlineRef.once('value').then(snapshot => {
-        sync(snapshot.val(), lastOnlineRef);
-      });
-      lastOnlineRef.onDisconnect().set(new Date().getTime());  
-    };
+      sync();
+    }
   });
 }
 
