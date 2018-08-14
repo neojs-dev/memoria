@@ -1,15 +1,18 @@
-import * as STM from './db/stm.js';
-import * as preference from './db/preference.js';
+import * as STM from './stm/stm.js';
+import * as preference from './stm/preference.js';
 import * as editor from './editor.js';
 import * as sidebar from './sidebar.js';
 import * as notesList from './notesList.js';
 import * as theme from './theme.js';
+import * as signIn from './signIn.js';
+import * as firebase from './firebase/firebase.js';
 import { removeClass, registerServiceWorker } from './helpers.js';
 
 const body = document.querySelector('body');
 
 function handleLoad() {
   removeClass(body, 'preload');
+  firebase.init();
   registerServiceWorker();
 }
 
@@ -50,6 +53,10 @@ function handleClick(event) {
         event.target.parentNode.dataset.id,
         event.target.parentNode,
       );
+    }
+
+    if (event.target.matches('.button-signin')) {
+      signIn.sendEmail();
     }
   }
 }

@@ -1,4 +1,4 @@
-import * as preference from './db/preference.js';
+import * as preference from './stm/preference.js';
 
 const themes = {
   day: {

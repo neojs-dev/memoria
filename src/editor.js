@@ -1,7 +1,8 @@
-import * as STM from './db/stm.js';
+import * as STM from './stm/stm.js';
 import * as notesList from './notesList.js';
 import * as statusbar from './statusbar.js';
 import * as scrollbar from './scrollbar.js';
+import * as database from './firebase/database.js';
 import {
   nonEmptyLineFilter,
   assignUniqueIDToElement,
@@ -31,6 +32,7 @@ function save() {
   if (note.title) {
     STM.add(note);
     STM.save();
+    database.save();
     notesList.render();
   }
   statusbar.changeTextContent('Saved');
