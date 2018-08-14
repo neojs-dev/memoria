@@ -8,6 +8,7 @@ export default function handleAuthState() {
       loading.show();
       signIn.hide(); 
       database.load();
+      database.userPresence();
     } else {
       signIn.show();
       loading.hide();
