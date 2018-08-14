@@ -6,5 +6,6 @@ Note-taking web app
 * Offline support
 * Day/Night mode
 * Installable
+* ES modules
 
 https://neosiae.github.io/memoria/
