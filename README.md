@@ -9,4 +9,4 @@ Note-taking web app
 - Installable
 - ES modules
 
-https://neojs-dev.github.io/reducer-context/
+https://neojs-dev.github.io/memoria/
